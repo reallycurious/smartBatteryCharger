@@ -1,0 +1,43 @@
+#include "config.h"
+
+//Configuration Bits
+//SYNC    BRG16   BRGH    [BRG/EUSART Mode]   [Baud Rate Formula]
+//0       0       0       8-bit/Asynchronous  F OSC /[64 (n+1)]
+//0       1       0       16-bit/Asynchronous F OSC /[16 (n+1)]
+//0       1       1       16-bit/Asynchronous F OSC /[4 (n+1)]
+
+char UART_Init_tx_only(const unsigned long baudrate)
+{
+    unsigned short n_plus; //(n+1)
+    //unsigned short = error;    
+    //Select 16-bit/Asynchronous with BRG16 (F OSC /[4 (n+1)])
+    SYNC = 0;   //Asynchronous Mode
+    BRG16 = 1;  //16Bit BRG for reduced error rate
+    BRGH = 1;   //BRGH is used
+    
+    //sanity check
+    if (baudrate >= (_XTAL_FREQ >> 2) ) //impossible baud
+        return 0;   //failed
+    //Calculate SPBRGH:SPBRGL    
+    n_plus = (_XTAL_FREQ >> 2)/baudrate;
+    //error = (_XTAL_FREQ >> 2)%baudrate;
+            
+    SPBRG = n_plus -1;  //Select Baud Rate (SPBRGH:SPBRGL)
+    SPEN = 1;   //Serial Port Enable
+    CREN = 0;   //Continuous Receive Enable (0 = Disable receive)
+    TXEN = 1;   //Transmit Enable
+    return 1;   //success                
+}
+
+void UART_Write(char data)
+{
+  while(!TRMT);
+  TXREG = data;
+}
+
+void UART_Write_Text(char *text)
+{
+  int i;
+  for(i=0;text[i]!='\0';i++)
+    UART_Write(text[i]);
+}
