@@ -57,7 +57,7 @@
 #define vUNIT 20 //20mV = 0.02v
 #define vDISCONNECT 2*1000/vUNIT //2000mv (2 volt)
 #define vERROR  10*1000/vUNIT //10000mv (10 volt)
-#define vDELTA 60/vUNIT //60mV (Charge cut off negative delta voltage)
+#define vDELTA 60/vUNIT //12*5mV = 60mV (Charge cut off negative delta voltage / 5mV per cell)
 #define MAX_VOLTAGE 19*1000/vUNIT //19v
 #define MAX_PLATEAU 15*60   //15 minutes
 #define MAX_CTIME  3*60*60 //3 hours
