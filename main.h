@@ -63,10 +63,6 @@
  */
 // TODO Insert declarations or function prototypes (right here) to leverage 
 // live documentation
-short aRead(char channel); //analog read
-char UART_Init_tx_only(const unsigned long baudrate);
-void UART_Write(char data);
-void UART_Write_Text(char *text);
 
 #ifdef	__cplusplus
 extern "C" {
@@ -74,6 +70,20 @@ extern "C" {
 
     // TODO If C++ is being used, regular C code needs function names to have C 
     // linkage so the functions can be used by the c code. 
+    
+//Analog functions
+char initADC(char channel);
+short aRead(char channel); //analog read
+char initPWM(char channel, unsigned char duty);
+void stopPWM(char channel);
+
+//UART functions
+char UART_Init(const unsigned long baudrate);
+char UART_Init_tx_only(const unsigned long baudrate);
+#define UART_TX_Empty TRMT
+#define UART_Data_Ready RCIF
+char UART_Read();
+void UART_Write(char data);
 
 #ifdef	__cplusplus
 }
