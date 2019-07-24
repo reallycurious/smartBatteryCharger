@@ -1,4 +1,4 @@
-#include "config.h"
+#include "main.h"
 
 //Configuration Bits
 //SYNC    BRG16   BRGH    [BRG/EUSART Mode]   [Baud Rate Formula]
@@ -6,7 +6,8 @@
 //0       1       0       16-bit/Asynchronous F OSC /[16 (n+1)]
 //0       1       1       16-bit/Asynchronous F OSC /[4 (n+1)]
 
-char UART_Init_tx_only(const unsigned long baudrate)
+
+char UART_Init(const unsigned long baudrate)
 {
     unsigned short n_plus; //(n+1)
     //unsigned short = error;    
@@ -24,20 +25,25 @@ char UART_Init_tx_only(const unsigned long baudrate)
             
     SPBRG = n_plus -1;  //Select Baud Rate (SPBRGH:SPBRGL)
     SPEN = 1;   //Serial Port Enable
-    CREN = 0;   //Continuous Receive Enable (0 = Disable receive)
+    CREN = 1;   //Continuous Receive Enable (0 = Disable receive)
     TXEN = 1;   //Transmit Enable
     return 1;   //success                
 }
 
-void UART_Write(char data)
+char UART_Init_tx_only(const unsigned long baudrate)
 {
-  while(!TRMT);
-  TXREG = data;
+    UART_Init(baudrate);
+    CREN = 0;   //Continuous Receive Enable (0 = Disable receive)
 }
 
-void UART_Write_Text(char *text)
+char UART_Read()
 {
-  int i;
-  for(i=0;text[i]!='\0';i++)
-    UART_Write(text[i]);
+  while(!UART_Data_Ready); //wait for receive buffer to fill
+  return RCREG;
+}
+
+void UART_Write(char data)
+{
+  while(!UART_TX_Empty); //wait for send buffer to empty
+  TXREG = data;
 }
