@@ -11104,7 +11104,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="CLK" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_01" device=""/>
 <part name="RST" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_01" device=""/>
 <part name="C3" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="C-EU" device="C0805" value="10mF"/>
-<part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R9" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" value="220"/>
 <part name="R1" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" value="100K"/>
 <part name="IC1" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="78*" device="TV" package3d_urn="urn:adsk.eagle:package:16417/2" technology="05"/>
@@ -11112,6 +11111,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="Q1" library="transistor-power" library_urn="urn:adsk.eagle:library:400" deviceset="TIP41C" device="" package3d_urn="urn:adsk.eagle:package:29487/2"/>
 <part name="SUPPLY1" library="SparkFun-PowerSymbols" library_urn="urn:adsk.eagle:library:530" deviceset="5V" device=""/>
 <part name="FRAME1" library="SparkFun-Aesthetics" library_urn="urn:adsk.eagle:library:507" deviceset="FRAME-A4L" device=""/>
+<part name="TEMP" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_01" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -11210,9 +11210,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="NAME" x="80.264" y="56.261" size="1.778" layer="95"/>
 <attribute name="VALUE" x="80.264" y="51.181" size="1.778" layer="96"/>
 </instance>
-<instance part="GND6" gate="1" x="83.82" y="38.1" smashed="yes">
-<attribute name="VALUE" x="81.28" y="35.56" size="1.778" layer="96"/>
-</instance>
 <instance part="R9" gate="G$1" x="132.08" y="38.1" smashed="yes" rot="R180">
 <attribute name="NAME" x="135.89" y="36.6014" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="135.89" y="41.402" size="1.778" layer="96" rot="R180"/>
@@ -11240,6 +11237,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="DRAWING_NAME" x="184.15" y="13.97" size="2.54" layer="94" font="vector"/>
 <attribute name="LAST_DATE_TIME" x="184.15" y="8.89" size="2.286" layer="94" font="vector"/>
 <attribute name="SHEET" x="198.12" y="3.81" size="2.54" layer="94" font="vector"/>
+</instance>
+<instance part="TEMP" gate="G$1" x="180.34" y="60.96" smashed="yes" rot="R180">
+<attribute name="VALUE" x="182.88" y="65.786" size="1.778" layer="96" font="vector" rot="R180"/>
+<attribute name="NAME" x="182.88" y="57.912" size="1.778" layer="95" font="vector" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -11386,12 +11387,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="129.54" y1="60.96" x2="139.7" y2="60.96" width="0.1524" layer="91"/>
 <label x="129.54" y="60.96" size="1.778" layer="95"/>
 </segment>
-</net>
-<net name="LED" class="0">
 <segment>
-<pinref part="U1" gate="U" pin="RA5"/>
-<wire x1="104.14" y1="66.04" x2="93.98" y2="66.04" width="0.1524" layer="91"/>
-<label x="96.52" y="66.04" size="1.778" layer="95"/>
+<pinref part="TEMP" gate="G$1" pin="1"/>
+<wire x1="172.72" y1="60.96" x2="162.56" y2="60.96" width="0.1524" layer="91"/>
+<label x="162.56" y="60.96" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="MCLR" class="0">
@@ -11467,6 +11466,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="R9" gate="G$1" pin="1"/>
 <wire x1="137.16" y1="38.1" x2="149.86" y2="38.1" width="0.1524" layer="91"/>
 <label x="142.24" y="38.1" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U1" gate="U" pin="RA5"/>
+<wire x1="104.14" y1="66.04" x2="93.98" y2="66.04" width="0.1524" layer="91"/>
+<label x="96.52" y="66.04" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$2" class="0">
