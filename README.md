@@ -1,4 +1,4 @@
-# smartBatteryCharger
+# smartBatteryCharger (incomplete)
 PIC12F1572 based Charger for 14.4V cordless drill
 
 <b>Warning:</b> This charger design and accompanying code is based on a lot of assumptions. Some of which may or might not hold true. So if you want to adopt this design and/or code do so at your own risk.
